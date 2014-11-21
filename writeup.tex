@@ -1,0 +1,36 @@
+\documentclass[10pt]{article}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{graphicx}
+% \usepackage{multirow}
+% \usepackage{wrapfig}
+\usepackage{enumerate}
+\usepackage{cite}
+% \usepackage[margin=1.1in]{geometry}
+
+\begin{document}
+\title{6.867 Final Project: Why Do We Need Complex Networks}
+\author{Michele Pratusevich}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+
+* CNNs have proven effective in image classification because of the ability to learn high-level features
+* CNN is like a multiclass perceptron?
+	* start with a single multiclass logistic regression classifier in caffe on SUN
+* http://groups.csail.mit.edu/vision/SUN/
+* neural networks are really networks of logistic regression things
+* multiclass logistic regression on SUN database
+
+* can use the dataset that is already on aditya's folder: 
+/data/vision/torralba/aditya_datasets/data/SUN397/SUN397
+
+1. simple logistic regression classifier: network example given here http://caffe.berkeleyvision.org/tutorial/net_layer_blob.html
+
+\section{Method}
+
+* had to install caffe
+* mostly used resources online, except the built-in ATLAS on my OSX machine was not working, so had to add openblas to teh list of brew packages needed to be edited / installed / compiled
+
+\end{document}

@@ -1,0 +1,29 @@
+name: "LogReg"
+layers {
+  name: "sun"
+  type: IMAGE_DATA
+  top: "data"
+  top: "label"
+  data_param {
+    source: "name_of_file.txt"
+    batch_size: 64
+    new_height: 227
+    new_width: 227
+  }
+}
+layers {
+  name: "ip"
+  type: INNER_PRODUCT
+  bottom: "data"
+  top: "ip"
+  inner_product_param {
+    num_output: 2
+  }
+}
+layers {
+  name: "loss"
+  type: SOFTMAX_LOSS
+  bottom: "ip"
+  bottom: "label"
+  top: "loss"
+}
