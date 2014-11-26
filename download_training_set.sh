@@ -9,4 +9,4 @@ do
 	# echo "$baseurl""$line";
 	wget -P images"$subdir" "$baseurl""$line";
 	# echo images"$subdir";
-done < Partitions/Training_01.txt
+done < Partitions/Testing_01.txt

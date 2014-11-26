@@ -1,0 +1,44 @@
+mprat$ ./build/tools/convert_imageset -resize_width 227 -resize_height 227 ~/Documents/SUN/images ../6867-finalproject/imagesets/Testing_01_with_labels.txt sun_testing_01_leveldb
+E1126 13:18:01.980218 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/a/archive/sun_awgsrbljlsvhqjij.jpg
+E1126 13:18:09.490443 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/a/art_school/sun_aabogqsjulyvmcse.jpg
+E1126 13:18:10.686050 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/a/art_school/sun_apnzojafyvkariue.jpg
+Premature end of JPEG file
+E1126 13:18:18.659919 2029454096 convert_imageset.cpp:177] Processed 1000 files.
+E1126 13:18:38.251904 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/b/ball_pit/sun_atjhwqngtoeuwhso.jpg
+E1126 13:18:53.793262 2029454096 convert_imageset.cpp:177] Processed 2000 files.
+E1126 13:19:26.083509 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/b/bow_window/indoor/sun_asxvsqbexmmtqmht.jpg
+E1126 13:19:26.388406 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/b/bow_window/indoor/sun_abeugxecxrwzmffp.jpg
+E1126 13:19:27.239686 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/b/bow_window/outdoor/sun_auwcqhrtzkgihvlv.jpg
+E1126 13:19:27.411178 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/b/bow_window/outdoor/sun_apnvdyecnjjmcuhi.jpg
+E1126 13:19:28.386358 2029454096 convert_imageset.cpp:177] Processed 3000 files.
+E1126 13:20:03.615504 2029454096 convert_imageset.cpp:177] Processed 4000 files.
+E1126 13:20:22.344002 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/c/childs_room/sun_alggivksjwwiklmt.jpg
+E1126 13:20:35.807750 2029454096 convert_imageset.cpp:177] Processed 5000 files.
+E1126 13:20:56.527189 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/c/control_tower/outdoor/sun_avbcxakrvpomqdgr.jpg
+E1126 13:21:14.404494 2029454096 convert_imageset.cpp:177] Processed 6000 files.
+E1126 13:21:26.888025 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/d/diner/indoor/sun_ajmzozstvsxisvgx.jpg
+E1126 13:21:49.046159 2029454096 convert_imageset.cpp:177] Processed 7000 files.
+E1126 13:21:50.241108 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/e/elevator/door/sun_aaqsyluqbluugqgy.jpg
+E1126 13:22:04.219097 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/f/fastfood_restaurant/sun_aevchxlxoruhxgrb.jpg
+E1126 13:22:11.157784 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/f/firing_range/indoor/sun_affrzvahwjorpalo.jpg
+E1126 13:22:19.049728 2029454096 convert_imageset.cpp:177] Processed 8000 files.
+E1126 13:22:25.354349 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/f/formal_garden/sun_bjvrlaeatjufekft.jpg
+E1126 13:22:32.542703 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/g/garage/indoor/sun_akbocuwclkxqlofx.jpg
+E1126 13:22:50.942952 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/g/greenhouse/indoor/sun_addirvgtxfbndlwf.jpg
+E1126 13:23:01.649600 2029454096 convert_imageset.cpp:177] Processed 9000 files.
+E1126 13:23:45.029666 2029454096 convert_imageset.cpp:177] Processed 10000 files.
+libpng warning: iCCP: known incorrect sRGB profile
+E1126 13:24:02.063505 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/k/kindergarden_classroom/sun_ajtpaahilrqzarri.jpg
+E1126 13:24:17.098517 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/l/laundromat/sun_afrrjykuhhlwiwun.jpg
+E1126 13:24:19.523488 2029454096 convert_imageset.cpp:177] Processed 11000 files.
+E1126 13:25:01.124811 2029454096 convert_imageset.cpp:177] Processed 12000 files.
+E1126 13:25:22.207056 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/m/music_studio/sun_bsntklkmwqgnjrjj.jpg
+E1126 13:25:36.512760 2029454096 convert_imageset.cpp:177] Processed 13000 files.
+E1126 13:26:10.125000 2029454096 convert_imageset.cpp:177] Processed 14000 files.
+E1126 13:26:44.874495 2029454096 convert_imageset.cpp:177] Processed 15000 files.
+E1126 13:27:21.356195 2029454096 convert_imageset.cpp:177] Processed 16000 files.
+E1126 13:27:52.142999 2029454096 convert_imageset.cpp:177] Processed 17000 files.
+E1126 13:28:29.927744 2029454096 convert_imageset.cpp:177] Processed 18000 files.
+E1126 13:28:30.589038 2029454096 io.cpp:77] Could not open or find file /Users/mprat/Documents/SUN/images/t/track/outdoor/sun_aophkoiosslinihb.jpg
+E1126 13:29:04.100648 2029454096 convert_imageset.cpp:177] Processed 19000 files.
+E1126 13:29:33.730119 2029454096 convert_imageset.cpp:193] Processed 19829 files.
