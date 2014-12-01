@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{aizerman_theoretical_1964}
+Mark~A Aizerman, E~Braverman, and L~Rozonoer.
+\newblock Theoretical foundations of the potential function method in pattern
+  recognition learning.
+\newblock {\em Automation and Remote Control}, 25:821--837, 1964.
+
+\bibitem{lecun_handwritten_1990}
+Yann LeCun, B~Boser, J.S. Denker, D.~Henderson, R.E. Howard, W.~Hubbard, and
+  L.D. Jackel.
+\newblock Handwritten digit recognition with a back-propagation network.
+\newblock {\em {NIPS}}, 1990.
+
+\bibitem{lecun_gradient-based_1998}
+Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner.
+\newblock Gradient-based learning applied to document recognition.
+\newblock {\em Proceedings of the {IEEE}}, 86(11):2278--2324, 1998.
+
+\bibitem{li_deng_mnist_2012}
+{Li Deng}.
+\newblock The {MNIST} database of handwritten digit images for machine learning
+  research [best of the web].
+\newblock {\em {IEEE} Signal Processing Magazine}, 29(6):141--142, November
+  2012.
+
+\bibitem{rosenblatt_perceptron:_1958}
+Frank Rosenblatt.
+\newblock The perceptron: a probabilistic model for information storage and
+  organization in the brain.
+\newblock {\em Psychological review}, 65(6):386, 1958.
+
+\end{thebibliography}
