@@ -20,9 +20,9 @@ Something here. Do I even need this?
 
 \section{Introduction}
 
-The advent of perceptrons in machine learning classification tasks were developed as a supervised learning method for classification of linearly separable datasets in the 1950s, with inputs from scientists in neuroscience and artificial intelligence \cite{rosenblatt_perceptron:_1958}. The slow development from single-layer perceptrons to multi-layer perceptrons and kernel perceptrons \cite{aizerman_theoretical_1964} and the increasing popularity of kernelized support vector machines for non-linear classification meant that neural networks were put on the back burner of research for a few decades.
+Collaboration between artificial intelligence, neuroscience, and machine learning resulted in the invention of neural networks for use in classification or prediction tasks. With roots from single-layer perceptrons \cite{rosenblatt_perceptron:_1958} to multi-layer and kernel perceptrons \cite{aizerman_theoretical_1964}, increasing success on non-linear classification tasks (especially related to vision or images) have seen the revival of their popularity among the computer vision community. 
 
-A neural network success story in the computer vision community is the development of a back-propagation convolutional neural network (CNN) for handwritten digit recognition \cite{lecun_handwritten_1990}. The original data used was approximately 10,000 handwritten digits, classified into one of 10 categories (one category for each digit). This original dataset was later expanded into the MNIST handwritten digit database with over 60,000 examples \cite{lecun_gradient-based_1998}, \cite{li_deng_mnist_2012}. The network used by LeCunn et. al. used the idea of convolution layers - described essentially as features extracted from parts of the image by kernels of varying sizes, generally getting smaller and smaller. The general idea is that these $n \times n$ kernels will `find' specific features in the image. In between, there are layers that perform averaging or weighting of the features that it receives. The final layer is fully-connected to the receptive fields of the previous layer, meaning the output is a vector that predicts which of the 10 classes the digit falls into. Improvements to this network have been made incrementally over time, but the error rates on the test set for this initial network was $3.7$ percent. 
+A popular success story is the development of a back-propagation convolutional neural network (CNN) for handwritten digit recognition \cite{lecun_handwritten_1990}. The original data used was approximately 10,000 handwritten digits, classified into one of 10 categories (one category for each digit). This original dataset was later expanded into the MNIST handwritten digit database with over 60,000 examples \cite{lecun_gradient-based_1998}, \cite{li_deng_mnist_2012}. The network used by LeCunn et. al. used the idea of convolution layers - described essentially as features extracted from parts of the image by kernels of varying sizes, generally getting smaller and smaller. The general idea is that these $n \times n$ kernels will `find' specific features in the image. In between, there are layers that perform averaging or weighting of the features that it receives. The final layer is fully-connected to the receptive fields of the previous layer and outputs a probability estimate for the class the image belongs to, meaning it essentially performs a weighted sum of all the inputs it sees for each parameter, with different weight parameters for each predicted class. Improvements to this network have been made incrementally over time, but the error rates on the test set for this initial network was $3.7$ percent. 
 
 The interesting insights from LeCun's simplified architecture \cite{lecun_handwritten_1990} compared to a previous network that had more connections (also designed by LeCun) \cite{lecun_backpropagation_1989} were two-fold: (1) that images could be fed directly into the neural network rather than extracting features, then feeding the features into the network, and (2) knowing a-priori the nature of the classification task can give hints about how to simplify the network to contain fewer parameters to optimize over. In general, these ideas of simplification of neural networks can be applied to larger and more complex neural networks \cite{lecun_optimal_1989}. 
 
@@ -36,7 +36,7 @@ In this project, I will explore the idea of simplified CNNs for the scene recogn
 
 \section{Dataset}
 
-The task of scene recognition 
+The task of scene recognition is different from object recognition in that the classification requires 
 
 % * CNNs have proven effective in image classification because of the ability to learn high-level features
 % * CNN is like a multiclass perceptron?
@@ -55,9 +55,16 @@ The task of scene recognition
 * had to install caffe
 * mostly used resources online, except the built-in ATLAS on my OSX machine was not working, so had to add openblas to teh list of brew packages needed to be edited / installed / compiled
 
+* learning rate of zero means that no learning is happening. 
+
+optimization of hyperparameters is the hardest part. some tricks from \cite{bottou_large-scale_2010}.
+
 \section{Experiments}
 
+* Running with a 0 learning rate does give top-5 accuracy of 0.01
+* got 14 percent accuracy with logistic regression
 
+* max-pooling `localizes' an object? maybe this is not necessary when doing scene recognition
 
 \bibliographystyle{plain}
 \bibliography{6867project}

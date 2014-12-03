@@ -1,6 +1,6 @@
 #!/bin/bash
 
-counter=0;
+counter=-1;
 prevcatname="";
 
 while read line
@@ -9,6 +9,7 @@ do
 	subdir=`expr "$line" : '\(/[a-z]/[a-z].*/\)'`;
 	catname=${subdir:3};
 	echo "$catname";
+
 	if [ "$prevcatname" != "$catname" ] 
 	then
 		(( counter+= 1 ));
@@ -17,6 +18,6 @@ do
 	fi
 
 	# add the label to the text file
-	echo "$line" "$counter" >> Testing_01_with_labels.txt;
+	echo "$line" "$counter" >> Training_01_with_labels_0_start.txt;
 
-done < Testing_01.txt
+done < Training_01.txt
