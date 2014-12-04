@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  1 DEC 2014 13:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  4 DEC 2014 15:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -175,34 +175,60 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 25.
 
-(./writeup.bbl [1
+[1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+Overfull \hbox (17.797pt too wide) in paragraph at lines 29--30
+\OT1/cmr/m/n/10 CNNs be-came a pop-u-lar tech-nique for com-plet-ing com-puter 
+vi-sion tasks. Krizhevsky
+ []
+
+[2] [3] <Logistic-curve.png, id=20, 602.25pt x 401.5pt>
+File: Logistic-curve.png Graphic file (type png)
+
+<use Logistic-curve.png>
+Package pdftex.def Info: Logistic-curve.png used on input line 74.
+(pdftex.def)             Requested size: 158.70232pt x 105.80272pt.
+ <logreg.pdf, id=22, 460.72125pt x 116.435pt>
+File: logreg.pdf Graphic file (type pdf)
+
+<use logreg.pdf>
+Package pdftex.def Info: logreg.pdf used on input line 80.
+(pdftex.def)             Requested size: 158.70232pt x 40.10616pt.
+ [4 <./Logistic-curve.png> <./logreg.pdf>] (./writeup.bbl
+[5]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
-) [2] (./writeup.aux) ) 
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no © in font cmr10!
+ [6]) [7] (./writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 2704 strings out of 493117
- 42802 string characters out of 6135433
- 95683 words of memory out of 5000000
- 6159 multiletter control sequences out of 15000+600000
- 8233 words of font info for 29 fonts, out of 8000000 for 9000
+ 2743 strings out of 493117
+ 43502 string characters out of 6135433
+ 97765 words of memory out of 5000000
+ 6195 multiletter control sequences out of 15000+600000
+ 8540 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,38p,805b,209s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-sy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
-i10.pfb>
-Output written on writeup.pdf (2 pages, 110023 bytes).
+ 38i,8n,38p,1479b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmmi7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr17.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.p
+fb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pf
+b>
+Output written on writeup.pdf (7 pages, 202719 bytes).
 PDF statistics:
- 47 PDF objects out of 1000 (max. 8388607)
- 33 compressed objects within 1 object stream
+ 100 PDF objects out of 1000 (max. 8388607)
+ 71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

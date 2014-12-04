@@ -32,11 +32,21 @@ One big problem with using these extremely deep CNNs for feature extraction, fin
 
 Training neural networks still requires the fine-tuning of hyperparameters dictating the learning rate and the weight decay, but some have offered suggestions for how to improve back-propagation and the choosing of hyperparameters \cite{bottou_large-scale_2010}. However, simultaneously, there have been a number of papers questioning the need for the depth and complexity of the recently-used CNNs \cite{ba_deep_2013}. LeCun provided suggestions for the simplification of neural networks when working with the original handwritten digit classification network \cite{lecun_optimal_1989}. Another interesting area of research has been the idea of using Gaussian processes to optimize parameters in a neural network for a specific task. 
 
-In this project, I will explore the idea of simplified CNNs for the scene recognition vision task, drawing on ideas from recent literature about the effectiveness of using pre-trained networks, simplifying existing networks, and using extracted features to do various tasks. 
+In this project, I will explore the idea of simplified CNNs for the scene recognition vision task, drawing on ideas from recent literature about the effectiveness of using pre-trained networks, simplifying existing networks, and using extracted features to do various tasks. The main concepts I will explore are: 
 
-\section{Dataset and Tools}
+\begin{enumerate}
+	\item The effect of network size on training time 
+	\item The effect of kernel size on the learned receptive field and on training time
+	\item The process of choosing hyperparameters for learning
+\end{enumerate}
 
-The task of scene recognition is different from object recognition in that the classification requires 
+The main guiding this exploration is: can you construct a significantly simpler neural network for scene classification that has comparable results to an extremely deep neural network? Decisions in training and parameter tuning will be made to create the smallest network that can be trained in a reasonable amount of time (say 2 hours) to achieve positive results. A general answer to this question is a philosophical question in the field of computer vision, since it touches on the question of whether a highly-specific system that is quick to construct or a highly-general system that is versatile a better outcome. I claim that it depends on the task, but the idea of constructing a simple neural network for complex tasks like scene classification has not been addressed in the literature.
+
+\section{Dataset, Tools, and Related Work}
+
+The task of scene recognition is different from object recognition in that scene recognition relies on clues from the entire image and the general layout rather than specific qualities of objects. The standard dataset for scene recognition is the SUN397 database \cite{xiao_sun_2010}, which has 397 scene categories, with at least 100 images in both categories. The standard train / test splits have 50 images per category in both training and testing. The benchmark classification results on this dataset using hand-crafted features is reported by Xiao, et. al. \cite{xiao_sun_2010}, \cite{xiao_sun_2014}. To build on the SUN397 database is the PLACES database \cite{zhou_learning_2014}, which benchmarks itself against SUN397, and notably uses CNNs for scene classification, rather than hand-crafted features. Because SUN397 has a manageable amount of data to use for training, I will use that database to do tests, benchmarking against the classification rates reported in the SUN papers. The PLACES database and results will provide a second state-of-the-art benchmark for scene classification as well.
+
+To construct the neural networks and take advantage of GPU capabilities, I will use the Caffe software package \cite{jia_caffe:_2014}, optimized for GPU performance and slowly becoming the standard in academic work for building CNNs. There are bindings for C++, Python, and MATLAB, allowing for the use of various interfaces for analysis. The added benefit of using this system is that the PLACES database provides a trained CNN model that can be used for fine-tuning with SUN. Additionally, the Vision Group has a cluster of GPU machines that can effectively run Caffe with some persuasion, so the training times for the networks will be drastically improved over running on a small laptop PC CPU. One of the bottleneck steps in using training data is reading data from disk, so the training and testing sets are converted into LMDB databases optimized for multi-threaded querying. All images are resized to 227 x 227 pixels, in accordance with comparable computer vision experiments. The reason for the small size in images is three-fold: (1) consistent higher-resolution images were only available as standard datasets relatively recently; (2) it has been shown in prior experiments from both neuroscience and computer vision that image-level features do not change significantly when shrunk to this size REFERENCE, and (3) smaller images mean performance increases when reading from disk and computing features over the entire image.
 
 % * CNNs have proven effective in image classification because of the ability to learn high-level features
 % * CNN is like a multiclass perceptron?
@@ -45,28 +55,152 @@ The task of scene recognition is different from object recognition in that the c
 % * neural networks are really networks of logistic regression things
 % * multiclass logistic regression on SUN database
 
-% * can use the dataset that is already on aditya's folder: 
-% /data/vision/torralba/aditya_datasets/data/SUN397/SUN397
-
 % 1. simple logistic regression classifier: network example given here http://caffe.berkeleyvision.org/tutorial/net_layer_blob.html
 
 \section{Method}
 
-* had to install caffe
-* mostly used resources online, except the built-in ATLAS on my OSX machine was not working, so had to add openblas to teh list of brew packages needed to be edited / installed / compiled
+The first step in the neural network analysis is to set up Caffe to run on both my personal computer (for small-scale testing and development) and the Vision Cluster (for running experiments). Both proved to be a challenging task because of the need to link highly optimized numerical libraries, resulting in my writing an addendum for how to install Caffe on OSX 10.9 on the Caffe Github wiki.
 
-* learning rate of zero means that no learning is happening. 
+To set up a single network in Caffe is complicated without knowing the interface, so as a benchmark to start, I constructed a basic logistic regression classifier as a neural network. In the default neural network, activation is computed using the sigmoid function, shown in Figure \ref{fig:sigmoid}. In multiclass logistic regression, the loss function is the softmax function given $K$ linear input functions, represented by 
 
-optimization of hyperparameters is the hardest part. some tricks from \cite{bottou_large-scale_2010}.
+\begin{equation}
+	P(y = j | x) = \frac{e^{x^T w_k}}{\sum_{k = 1}^K e^{x^T w_k}}
+\end{equation}
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[b]{0.46\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{Logistic-curve.png}
+	\caption{Sigmoid activation function (taken from Wikipedia)}
+	\label{fig:sigmoid}
+\end{subfigure}
+\begin{subfigure}[b]{0.46\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{logreg.pdf}
+	\caption{Simplified neural network architecture for logistic regression}
+	\label{fig:logregnn}
+\end{subfigure}
+\end{figure}
+
+The setup for (linear) logistic regression as a neural network is then represented as shown in Figure \ref{fig:logregnn}. A fully-connected layer is equivalent to a weighted sum of the dot product between the inputs, represented in the softmax function as $x^T w_k$. Represented as a neural network with 397 outputs in the softmax loss function, there are 397 neurons in the fully connected layer, meaning approximately 500 parameters. Using stochastic gradient descent to compute the parameters, the optimal learning weight (by grid search and suggestions from Bottou \cite{bottou_large-scale_2010}) was found to be approximately $1 \times 10^{-8}$. On a GPU for 20000 iterations, this takes approximately one hour and results in a top-1 accuracy prediction of 4 percent and a top-5 accuracy prediction of 13 percent. Because simple logistic regression learns relatively few parameters and is only capable of linear combinations of inputs, the idea is that adding any sort of more complicated network will increase this base classification rate. Methods involving more complicated networks were only considered if they yielded results better than this baseline 13 percent top-5 accuracy with logistic regression. 
+
+The standard metric for measuring success against the SUN database is the top-1 classification accuracy rate for correctly predicting with maximum likelihood the correct class. However, because many categories in the SUN397 database are similar (like for example `building exterior' and `apartment building outdoor'), I will also report a top-5 accuracy rate.
+
+After exploring this pipeline using Caffe, for each set of experiments I had to do the following steps: 
+
+\begin{enumerate}
+	\item Define the network representation
+	\item Define the solver parameters
+	\item Define the validation / hyperparameter search procedure
+	\item Train the network on the GPU using the training set
+	\item Test the network on the GPU using the test set
+\end{enumerate}
+
+For all experiments, the same training and test sets were used. 
 
 \section{Experiments}
 
-* Running with a 0 learning rate does give top-5 accuracy of 0.01
-* got 14 percent accuracy with logistic regression
+Because I was limited by computational power and time, for each experiment I chose a few token representations and ran tests on those. The next section will summarize the findings as general conclusions, while here I will report the results and give some observations for specific experiments. A summary of the results of the experiments with best results are given in Table \ref{tbl:results}, along with a comparison of state-of-the-art results.
 
-* max-pooling `localizes' an object? maybe this is not necessary when doing scene recognition
+\begin{table}[!ht]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}[ht]{c|c|c}
+Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
+Logistic regression & 4 \% & 14 \% \\
+\end{tabular}
+}
+\caption{Summary of top-1 and top-5 accuracy results on the test set}
+\label{tbl:results}
+\end{table}
 
-* need to also compare to fine-tuning places CNN to SUN397
+\subsection{Single-layer networks of varying kernel size}
+
+For the first set of experiments, single-layer networks with varying kernel size were used. A convolutional layer in a neural network in the context of a computer vision task is similar to training a `receptive field' of an eye. The idea is that some number of $n \times m$ kernels will be computed over the entire image, acting like `filters', then passed to higher layers in the network. In the single-layer network case, the output of the kernel filters are then passed to a fully-connected layer that does a weighted sum of the filters, then passed to a softmax function to predict the probabilities. 
+
+There were a number of numerical issues when approaching the convolution layer problem. For one, having a large number of output filters means that there are an incredibly large vector of numbers passed to the fully-connected layer of the network. Having too parameters in the vector many means that there is a strong chance that there will not be enough memory to pass these variables around to optimize. Therefore, we use our knowledge of the domain space and of kernels to add an additional layer to the network that both improves performance and decreases training time. Instead of passing all the computed kernels for the entire image to the fully-connected layer, only pass the kernel result that maximally fires for that particular image. This is done in Caffe with `max-pooling'. In general, the structure of networks used is shown in Figure SOMETHING. 
+
+The kernels that were tested were $8 \times 8$, $12 \times 12$, and $20 \times 20$. AlexNet, PlacesCNN, LeNet, and many other successful CNNs for image tasks use $12 \times 12$ kernels in their first convolutional layer. The kernel that performed the best for a single layer was the $20 \times 20$ kernel. In all cases, there were a total of $96$ kernels computed and a max-pooling layer was then fed into the fully-connected layer. Results for all single-kernel experiments are given in Table \ref{tbl:singlelayer}.
+
+\begin{table}[!ht]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}[ht]{c|c|c}
+Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
+96 8$\times$8 kernels, no dropout &  4.8 \% & 14.8 \% \\
+96 8$\times$8 kernels, with dropout &  5.7 \% &  15.2 \% \\
+96 8$\times$8 kernels, with dropout and RELU & .8 \% & 2 \% \\
+96 12$\times$12 kernels, no dropout &  4.4 \% & 13.5 \% \\
+96 12$\times$12 kernels, with dropout &  5.5 \% & 15.8 \% \\
+96 20$\times$20 kernels, with dropout & 6.7 \% & 18.2 \% \\
+\end{tabular}
+}
+\caption{Summary of top-1 and top-5 accuracy results on single-layer networks after 20000 iterations}
+\label{tbl:singlelayer}
+\end{table}
+
+\subsection{Single-layer networks with rectifying linear units}
+
+t has often been cited in successful CNN papers like AlexNet or LeNet \cite{krizhevsky_imagenet_2012}, \cite{lecun_handwritten_1990} that instead of using a sigmoid activation function that a rectified linear function of the form $\max(0, x)$ leads to faster training and improved results, but in 20000 iterations of training on multiple single-layer networks like $8 \times 8$ and $12 \times 12$, the training took approximately double the time than similar networks using sigmoid activation functions and yielded poorer results. So for the rest of the tests, using rectified linear units were not used.
+
+\subsection{Using dropout}
+
+Experiments were also conducted for single-layer networks using dropout layers. It was cited by AlexNet \cite{krizhevsky_imagenet_2012} that dropout layers reduced overfitting. At the output of every convolutional layer, a dropout layer that takes the sample and with probability 0.5 includes it in the resulting output vector. This is equivalent to doing averaging over a number of models to produce a final result. From Table \ref{tbl:singlelayer}, it is clear that dropout layers improve the performance without changing the hyperparameters. Therefore, with all further experiments, dropout layers will be added after every convolutional layer to prevent overfitting. It is especially important to do this when there is not a lot of labeled training data, as with the SUN397 database setup we are using, where there are only 50 labeled images per class.
+
+\subsection{Two-layer networks}
+
+After the hyperparameters were roughly optimized for single-layer networks, two-layer networks of varying sizes were tried. An additional variable in network design is the decision for how many outputs from each convolutional layer to include. Because each new output adds an additional set of parameters for the network to optimize, the hypothesis was that smaller numbers of outputs of correctly-chosen output sizes would be both more effective during testing and faster to train. A summary of two-layer results is given in Table \ref{tbl:twolayer}.
+
+\begin{table}[!ht]
+\centering
+\makebox[\textwidth][c]{
+\begin{tabular}[ht]{c|c|c}
+Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
+30 12$\times$12 kernels, 30 6$\times$6 kernels &  9.2 \% & 24.7 \% \\
+30 20$\times$20 kernels, 30 6$\times$6 kernels &  \% &  \% \\
+30 12$\times$12 kernels, 30 3$\times$3 kernels &  \% &  \% \\
+
+\end{tabular}
+}
+\caption{Summary of top-1 and top-5 accuracy results on two-layer networks after 20000 iterations}
+\label{tbl:twolayer}
+\end{table}
+
+ONE MORE LONG ONE FOR A LONG TIME. MAYBE TWO OVERNIGHT 
+* significantly faster training time when there were 30 outputs from each layer (12 and 6, 30 each, about 40 minutes total for 20000 iterations)
+
+\subsection{Fine-tuning on PLACES-CNN}
+
+
+
+\section{Conclusions}
+
+\subsection{Network size and training time}
+
+* the `size' that is the most importnat is the number of parameters rather than number of layers
+* 12_6_30_each was fairly fast (40 minutes for 20000 iterations, to great result)
+* larger networks were less suspeptible to overfitting 
+
+\subsection{Kernel size and receptive fields}
+
+
+
+\subsection{Choosing hyperparameters}
+
+* started from hyperparameters given in CNN papers
+* like in 8_kernel_1_pool_1_dropout_10000_step_1e5, optimal learning rate for NNs of comparable size was 0.00001 with dropoff by a factor of 10 every 10000 iterations
+* gaussian processes might have been easier than a grid search
+* use what you know about the domain space - number of classes can dictate the paths of activation that the neurons can take
+
+\subsection{Mitigating Overfitting}
+
+* significant overfitting in single-layer networks (8_kernel_1_pool_1_dropout_10000_step_1e5_iter_20000.caffemodel)
+* multi-layer
+* adjusting number of parameters in network
+* dropout at as many layers as there are convolutional layers
+* relus were suggested to work and be easier to train, but for small networks this is not the case and actually yielded very poor results
+
 
 \bibliographystyle{plain}
 \bibliography{6867project}

@@ -1,10 +1,48 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{aizerman_theoretical_1964}
 Mark~A Aizerman, E~Braverman, and L~Rozonoer.
 \newblock Theoretical foundations of the potential function method in pattern
   recognition learning.
 \newblock {\em Automation and Remote Control}, 25:821--837, 1964.
+
+\bibitem{ba_deep_2013}
+Lei~Jimmy Ba and Rich Caurana.
+\newblock Do deep nets really need to be deep?
+\newblock {\em {arXiv} preprint {arXiv}:1312.6184}, 2013.
+\newblock Eventually in {NIPS}.
+
+\bibitem{bottou_large-scale_2010}
+Léon Bottou.
+\newblock Large-scale machine learning with stochastic gradient descent.
+\newblock In {\em Proceedings of {COMPSTAT}'2010}, pages 177--186. Springer,
+  2010.
+
+\bibitem{donahue_decaf:_2014}
+Jeff Donahue, Yangqing Jia, Oriol Vinyals, Judy Hoffman, Ning Zhang, Eric
+  Tzeng, and Trevor Darrell.
+\newblock Decaf: A deep convolutional activation feature for generic visual
+  recognition.
+\newblock In {\em Proceedings of the International Conference on Machine
+  Learning}, Beijing, China, 2014.
+
+\bibitem{jia_caffe:_2014}
+Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross
+  Girshick, Sergio Guadarrama, and Trevor Darrell.
+\newblock Caffe: Convolutional architecture for fast feature embedding.
+\newblock {\em {arXiv} preprint {arXiv}:1408.5093}, 2014.
+
+\bibitem{krizhevsky_imagenet_2012}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E. Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{lecun_backpropagation_1989}
+Yann LeCun, B.~Boser, J.~S. Denker, D.~Henderson, and L.~D. Jackel.
+\newblock Backpropagation applied to handwritten zip code recognition y.
+  {LeCun}.
+\newblock {\em Neural Computation}, 1(4):541--551, 1989.
 
 \bibitem{lecun_handwritten_1990}
 Yann LeCun, B~Boser, J.S. Denker, D.~Henderson, R.E. Howard, W.~Hubbard, and
@@ -16,6 +54,12 @@ Yann LeCun, B~Boser, J.S. Denker, D.~Henderson, R.E. Howard, W.~Hubbard, and
 Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner.
 \newblock Gradient-based learning applied to document recognition.
 \newblock {\em Proceedings of the {IEEE}}, 86(11):2278--2324, 1998.
+
+\bibitem{lecun_optimal_1989}
+Yann LeCun, John~S. Denker, Sara~A. Solla, Richard~E. Howard, and Lawrence~D.
+  Jackel.
+\newblock Optimal brain damage.
+\newblock In {\em {NIPS}}, volume~2, pages 598--605, 1989.
 
 \bibitem{li_deng_mnist_2012}
 {Li Deng}.
@@ -29,5 +73,30 @@ Frank Rosenblatt.
 \newblock The perceptron: a probabilistic model for information storage and
   organization in the brain.
 \newblock {\em Psychological review}, 65(6):386, 1958.
+
+\bibitem{russakovsky_imagenet_2014}
+Olga Russakovsky, Jia Deng, Hao Su, Jonathan Krause, Sanjeev Satheesh, Sean Ma,
+  Zhiheng Huang, Andrej Karpathy, Aditya Khosla, Michael Bernstein, and
+  {others}.
+\newblock {ImageNet} large scale visual recognition challenge ({ILSVRC}).
+\newblock {\em {arXiv} preprint {arXiv}:1409.0575}, 2014.
+
+\bibitem{xiao_sun_2014}
+Jianxiong Xiao, Krista~A. Ehinger, James Hays, Antonio Torralba, and Aude
+  Oliva.
+\newblock {SUN} database: Exploring a large collection of scene categories.
+\newblock {\em International Journal of Computer Vision}, August 2014.
+
+\bibitem{xiao_sun_2010}
+Jianxiong Xiao, James Hays, Krista~A. Ehinger, Aude Oliva, and Antonio
+  Torralba.
+\newblock Sun database: Large-scale scene recognition from abbey to zoo.
+\newblock In {\em Computer vision and pattern recognition ({CVPR}), 2010 {IEEE}
+  conference on}, pages 3485--3492. {IEEE}, 2010.
+
+\bibitem{zhou_learning_2014}
+Bolei Zhou, Agata Lapedriza, Jianxiong Xiao, Antonio Torralba, and Aude Oliva.
+\newblock Learning deep features for scene recognition using places database.
+\newblock In {\em {NIPS}}, 2014.
 
 \end{thebibliography}

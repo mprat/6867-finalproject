@@ -18,6 +18,6 @@ do
 	fi
 
 	# add the label to the text file
-	echo "$line" "$counter" >> Training_01_with_labels_0_start.txt;
+	echo "$line" "$counter" >> Training_02_with_labels_0_start.txt;
 
-done < Training_01.txt
+done < Training_02.txt
