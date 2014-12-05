@@ -1,17 +1,18 @@
 # Fdb version 3
-["bibtex writeup"] 1417723308 "writeup.aux" "writeup.bbl" "writeup" 1417723355
+["bibtex writeup"] 1417750780 "writeup.aux" "writeup.bbl" "writeup" 1417750782
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "6867project.bib" 1417715831 11149 aaecae508c22aa60906569c134889ddc ""
-  "writeup.aux" 1417723355 2810 a8205d706684fb2906a6f87c686deaaf ""
+  "writeup.aux" 1417750781 3872 4d441ea4823589294ddcc2a5dc6ab270 ""
   "writeup.bcf" 0 -1 0 ""
   (generated)
   "writeup.bbl"
-  "writeup.blg"
-["pdflatex"] 1417723354 "writeup.tex" "writeup.pdf" "writeup" 1417723355
+["pdflatex"] 1417750780 "writeup.tex" "writeup.pdf" "writeup" 1417750782
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
+  "/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty" 1303254447 7324 11d14f318d865f420e692d4e6c9c18c3 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty" 1303254447 7140 ece2cc23d9f20e1f53975ac167f42d3e ""
+  "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifvtex.sty" 1335995445 6797 68c89f65e01894df882dd523d3fc0a8f ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty" 1335995445 8253 3bdedc8409aa5d290a2339be6f09af03 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty" 1335995445 5152 387d9200f396b498d5fd679ae44ed898 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty" 1335995445 14040 8de9f47fabc4ca3bd69b6d795e32751c ""
@@ -23,6 +24,7 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/caption/caption3.sty" 1368312746 62748 b02c0dc118f5f35146d37cec569e83b1 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/caption/subcaption.sty" 1360019375 4351 ee16013c18d101f9ecb20e53efde17b4 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/cite/cite.sty" 1284405395 32577 d37d76244d26661e9ca51f1fa50cf0d1 ""
+  "/usr/local/texlive/2014/texmf-dist/tex/latex/geometry/geometry.sty" 1284422013 40502 e003406220954b0716679d7928aedd8a ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty" 1254151804 14183 42a8fc761b806986eef292369afc2988 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty" 1399675188 7911 bf0a64f89bfb668c239ddf6324bf4afb ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty" 1399675188 2317 0ace13e225e9d95dd9defe947adc9fbb ""
@@ -34,11 +36,16 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/tools/enumerate.sty" 1399675188 3255 42d834dc82171769c16badd22df87021 ""
-  "Logistic-curve.png" 1417719897 13263 a00c01b0721c2c704fec03d9eb815e02 ""
-  "logreg.pdf" 1417719539 13591 fddfa9d9294ec41485e0f14521f86d3e ""
-  "writeup.aux" 1417723355 2810 a8205d706684fb2906a6f87c686deaaf ""
-  "writeup.bbl" 1417723309 4076 c38a5fc5d6afba191524e4aaa3d061dd "bibtex writeup"
-  "writeup.tex" 1417723354 14732 344f54986143fc72103680ba86a4a7ee ""
+  "12_6_3_layer1.pdf" 1417750644 116625 e179bf65f648440a0c29b0257d011ced ""
+  "12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf" 1417750663 119277 5224f32d5162795ea9274bc7d40ec730 ""
+  "8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf" 1417749750 138192 3b96d42649ba9e6e92470f383eb4ac95 ""
+  "8_kernel_1_pool_5000_step_iter_50000.pdf" 1417749782 145461 d971e7c31e4a2c1fbc44b99d98c05df3 ""
+  "generalcnn.pdf" 1417749520 15129 c8bf27a3397fc251e3c179ccc7397c02 ""
+  "logreg.pdf" 1417749501 13548 dbf8b853122b09b727dcfaaebc3879b3 ""
+  "places205_finetune_layer1.pdf" 1417749810 112478 3ee25008060a1e6020847a2edb04300f ""
+  "writeup.aux" 1417750781 3872 4d441ea4823589294ddcc2a5dc6ab270 ""
+  "writeup.bbl" 1417750780 4076 c38a5fc5d6afba191524e4aaa3d061dd "bibtex writeup"
+  "writeup.tex" 1417750778 26828 42f1cc13a03a9b7e848037d9adf43af0 ""
   (generated)
   "writeup.log"
   "writeup.pdf"
