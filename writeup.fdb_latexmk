@@ -1,12 +1,13 @@
 # Fdb version 3
-["bibtex writeup"] 1417750780 "writeup.aux" "writeup.bbl" "writeup" 1417750782
+["bibtex writeup"] 1417752091 "writeup.aux" "writeup.bbl" "writeup" 1417752093
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "6867project.bib" 1417715831 11149 aaecae508c22aa60906569c134889ddc ""
-  "writeup.aux" 1417750781 3872 4d441ea4823589294ddcc2a5dc6ab270 ""
+  "writeup.aux" 1417752093 3872 205c3fc147c9470e5aa63ac1092d5a84 ""
   "writeup.bcf" 0 -1 0 ""
   (generated)
   "writeup.bbl"
-["pdflatex"] 1417750780 "writeup.tex" "writeup.pdf" "writeup" 1417750782
+  "writeup.blg"
+["pdflatex"] 1417752092 "writeup.tex" "writeup.pdf" "writeup" 1417752093
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
@@ -43,9 +44,9 @@
   "generalcnn.pdf" 1417749520 15129 c8bf27a3397fc251e3c179ccc7397c02 ""
   "logreg.pdf" 1417749501 13548 dbf8b853122b09b727dcfaaebc3879b3 ""
   "places205_finetune_layer1.pdf" 1417749810 112478 3ee25008060a1e6020847a2edb04300f ""
-  "writeup.aux" 1417750781 3872 4d441ea4823589294ddcc2a5dc6ab270 ""
-  "writeup.bbl" 1417750780 4076 c38a5fc5d6afba191524e4aaa3d061dd "bibtex writeup"
-  "writeup.tex" 1417750778 26828 42f1cc13a03a9b7e848037d9adf43af0 ""
+  "writeup.aux" 1417752093 3872 205c3fc147c9470e5aa63ac1092d5a84 ""
+  "writeup.bbl" 1417752092 4076 c38a5fc5d6afba191524e4aaa3d061dd "bibtex writeup"
+  "writeup.tex" 1417752089 27772 a08b28914d12f8023b93742a552ec607 ""
   (generated)
   "writeup.log"
   "writeup.pdf"

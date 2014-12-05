@@ -18,7 +18,7 @@
 
 Collaboration between artificial intelligence, neuroscience, and machine learning resulted in the invention of neural networks for use in classification or prediction tasks. With roots from single-layer perceptrons \cite{rosenblatt_perceptron:_1958} to multi-layer and kernel perceptrons \cite{aizerman_theoretical_1964}, increasing success on non-linear classification tasks (especially related to vision or images) have seen the revival of their popularity among the computer vision community. 
 
-A popular success story is the development of a back-propagation convolutional neural network (CNN) for handwritten digit recognition \cite{lecun_handwritten_1990}. The original data used was approximately 10,000 handwritten digits, classified into one of 10 categories (one category for each digit). This original dataset was later expanded into the MNIST handwritten digit database with over 60,000 examples \cite{lecun_gradient-based_1998}, \cite{li_deng_mnist_2012}. The network used by LeCunn et. al. used the idea of convolution layers - described essentially as features extracted from parts of the image by kernels of varying sizes, generally getting smaller and smaller. The general idea is that these $n \times n$ kernels will `find' specific features in the image. In between, there are layers that perform averaging or weighting of the features that it receives. The final layer is fully-connected to the receptive fields of the previous layer and outputs a probability estimate for the class the image belongs to, meaning it essentially performs a weighted sum of all the inputs it sees for each parameter, with different weight parameters for each predicted class. Improvements to this network have been made incrementally over time, but the error rates on the test set for this initial network was $3.7$ percent. 
+A popular success story is the development of a back-propagation convolutional neural network (CNN) for handwritten digit recognition \cite{lecun_handwritten_1990}. The original data used was approximately 10,000 handwritten digits, classified into one of 10 categories (one category for each digit). This original dataset was later expanded into the MNIST handwritten digit database with over 60,000 examples \cite{lecun_gradient-based_1998}, \cite{li_deng_mnist_2012}. The network used by LeCunn et. al. used the idea of convolution layers - described essentially as features extracted from parts of the image by kernels of varying sizes, generally getting smaller and smaller. The general idea is that these $n \times n$ kernels will `find' specific features in the image. Each kernel is basically a linear combination of the pixels in it's `receptive field' in some way. In between, there are layers that perform averaging or weighting of the features that it receives. The final layer is fully-connected to the receptive fields of the previous layer and outputs a probability estimate for the class the image belongs to, meaning it essentially performs a weighted sum of all the inputs it sees for each parameter, with different weight parameters for each predicted class. Improvements to this network have been made incrementally over time, but the error rates on the test set for this initial network was $3.7$ percent. 
 
 The interesting insights from LeCun's simplified architecture \cite{lecun_handwritten_1990} compared to a previous network that had more connections (also designed by LeCun) \cite{lecun_backpropagation_1989} were two-fold: (1) that images could be fed directly into the neural network rather than extracting features, then feeding the features into the network, and (2) knowing a-priori the nature of the classification task can give hints about how to simplify the network to contain fewer parameters to optimize over. In general, these ideas of simplification of neural networks can be applied to larger and more complex neural networks \cite{lecun_optimal_1989}. 
 
@@ -122,7 +122,7 @@ PLACES CNN best SUN397 result & 54.3 \% & not reported \\
 
 For the first set of experiments, single-layer networks with varying kernel size were used. A convolutional layer in a neural network in the context of a computer vision task is similar to training a `receptive field' of an eye. The idea is that some number of $n \times m$ kernels will be computed over the entire image, acting like `filters', then passed to higher layers in the network. In the single-layer network case, the output of the kernel filters are then passed to a fully-connected layer that does a weighted sum of the filters, then passed to a softmax function to predict the probabilities. 
 
-There were a number of numerical issues when approaching the convolution layer problem. For one, having a large number of output filters means that there are an incredibly large vector of numbers passed to the fully-connected layer of the network. Having too many parameters in the vector many means that there is a strong chance that there will not be enough memory to pass these variables around to optimize. Therefore, we use our knowledge of the domain space and of kernels to add an additional layer to the network that both improves performance and decreases training time. Instead of passing all the computed kernels for the entire image to the fully-connected layer, only pass the kernel result that maximally fires for that particular image. This is done in Caffe with `max-pooling'. In general, the structure of networks used is shown in Figure \ref{fig:generalcnn}. 
+There were a number of numerical issues when approaching the convolution layer problem. For one, having a large number of output filters means that there are an incredibly large vector of numbers passed to the fully-connected layer of the network. Having too many parameters in the vector many means that there is a strong chance that there will not be enough memory to pass these variables around to optimize. Therefore, we use our knowledge of the domain space and of kernels to add an additional layer to the network that both improves performance and decreases training time. Instead of passing all the computed kernels for the entire image to the fully-connected layer, only pass the kernel result that maximally fires for that particular image. Based on how many of the calculated kernels you want to pass to the next layer, this technique constructs a `feature map' for the image that is passed to the next layer. This is done in Caffe with `max-pooling'. In general, the structure of networks used is shown in Figure \ref{fig:generalcnn}. 
 
 The kernels that were tested were $8 \times 8$, $12 \times 12$, and $20 \times 20$. AlexNet, PlacesCNN, LeNet, and many other successful CNNs for image tasks use $12 \times 12$ kernels in their first convolutional layer. The kernel that performed the best for a single layer was the $20 \times 20$ kernel. In all cases, there were a total of $96$ kernels computed and a max-pooling layer was then fed into the fully-connected layer. Results for all single-kernel experiments are given in Table \ref{tbl:singlelayer}.
 
@@ -137,7 +137,7 @@ Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
 96 12$\times$12 kernels, no dropout &  4.4 \% & 13.5 \% \\
 96 12$\times$12 kernels, with dropout &  5.5 \% & 15.8 \% \\
 96 20$\times$20 kernels, with dropout & 6.7 \% & 18.2 \% \\
-30 20$\times$20 kernels, with dropout &  \% &  \% \\
+30 20$\times$20 kernels, with dropout &  6.5 \% & 17.9 \% \\
 \end{tabular}
 }
 \caption{Summary of top-1 and top-5 accuracy results on single-layer networks after 20000 iterations}
@@ -161,17 +161,19 @@ After the hyperparameters were roughly optimized for single-layer networks, two-
 \makebox[\textwidth][c]{
 \begin{tabular}[ht]{c|c|c}
 Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
-30 12$\times$12 kernels, 30 6$\times$6 kernels &  9.2 \% & 24.7 \% \\
-30 20$\times$20 kernels, 30 6$\times$6 kernels &  6.9 \% & 21.4 \% \\
-30 12$\times$12 kernels, 30 3$\times$3 kernels &  6.2 \% & 18.8 \% \\
-30 20$\times$20 kernels, 30 3$\times$3 kernels &  5.3 \% & 16.6 \% \\
-60 20$\times$20 kernels, 30 6$\times$6 kernels &  9.3 \% & 20.1 \% \\
+30 12$\times$12 kernels, 30 6$\times$6 kernels &  10 \% & 25.2 \% \\
+30 20$\times$20 kernels, 30 6$\times$6 kernels &  7.5 \% & 21.4 \% \\
+30 12$\times$12 kernels, 30 3$\times$3 kernels &  6.1 \% & 18.9 \% \\
+30 20$\times$20 kernels, 30 3$\times$3 kernels &  5.1 \% & 16.3 \% \\
+60 20$\times$20 kernels, 30 6$\times$6 kernels &  9.5 \% & 25.7 \% \\
 96 12$\times$12 kernels, 30 6$\times$6 kernels &  \% &  \% \\
 \end{tabular}
 }
 \caption{Summary of top-1 and top-5 accuracy results on two-layer networks after 20000 iterations}
 \label{tbl:twolayer}
 \end{table}
+
+In addition to tuning a few 2-layer network, one 3-layer network was tuned for 50000 iterations, with 30 12$\times$12 filters, then 30 6$\times$6 filters, then 30 3$\times$3 filters, with pooling and dropout layers after each convolutional layer. However, there was most likely something wrong with the solver parameters or there was not enough training done, since the top-1 accuracy for the 3-layer network was 1.6 percent and the top-5 accuracy was 7.4 percent. There was not enough time to do more 3-layer network experiments, but if there was time, training or grid search with more parameters would have been tried.
 
 \subsection{Fine-tuning on PLACES-CNN}
 
@@ -239,6 +241,7 @@ To start the hyperparameter optimization process, I started on the
 % * gaussian processes might have been easier than a grid search
 % * use what you know about the domain space - number of classes can dictate the paths of activation that the neurons can take
 % * more training and better results in top-5 accuracy. implies that MOAR training will yield better results in top-1 also
+% initialize with xavier or gaussian weights
 
 \subsection{Mitigating Overfitting}
 
