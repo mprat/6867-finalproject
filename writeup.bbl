@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{agrawal_analyzing_2014}
+Pulkit Agrawal, Ross Girshick, and Jitendra Malik.
+\newblock Analyzing the performance of multilayer neural networks for object
+  recognition.
+\newblock In {\em {ECCV}}, pages 329--344. Springer, 2014.
+
 \bibitem{aizerman_theoretical_1964}
 Mark~A Aizerman, E~Braverman, and L~Rozonoer.
 \newblock Theoretical foundations of the potential function method in pattern
@@ -25,6 +31,13 @@ Jeff Donahue, Yangqing Jia, Oriol Vinyals, Judy Hoffman, Ning Zhang, Eric
   recognition.
 \newblock In {\em Proceedings of the International Conference on Machine
   Learning}, Beijing, China, 2014.
+
+\bibitem{glorot_understanding_2010}
+Xavier Glorot and Yoshua Bengio.
+\newblock Understanding the difficulty of training deep feedforward neural
+  networks.
+\newblock In {\em International Conference on Artificial Intelligence and
+  Statistics}, pages 249--256, 2010.
 
 \bibitem{jia_caffe:_2014}
 Yangqing Jia, Evan Shelhamer, Jeff Donahue, Sergey Karayev, Jonathan Long, Ross

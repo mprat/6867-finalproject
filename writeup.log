@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  4 DEC 2014 23:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.5.25)  5 DEC 2014 12:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -251,7 +251,7 @@ Package pdftex.def Info: generalcnn.pdf used on input line 78.
 File: places205_finetune_layer1.pdf Graphic file (type pdf)
 
 <use places205_finetune_layer1.pdf>
-Package pdftex.def Info: places205_finetune_layer1.pdf used on input line 198.
+Package pdftex.def Info: places205_finetune_layer1.pdf used on input line 202.
 (pdftex.def)             Requested size: 145.69937pt x 145.77928pt.
 
 <8_kernel_1_pool_5000_step_iter_50000.pdf, id=54, 224.45164pt x 224.15862pt>
@@ -259,7 +259,7 @@ File: 8_kernel_1_pool_5000_step_iter_50000.pdf Graphic file (type pdf)
 
 <use 8_kernel_1_pool_5000_step_iter_50000.pdf>
 Package pdftex.def Info: 8_kernel_1_pool_5000_step_iter_50000.pdf used on input
- line 204.
+ line 208.
 (pdftex.def)             Requested size: 145.69937pt x 145.51666pt.
 
 <8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf, id=55, 225.19423pt x
@@ -268,47 +268,61 @@ File: 8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf Graphic file (ty
 pe pdf)
  <use 8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf>
 Package pdftex.def Info: 8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.p
-df used on input line 210.
+df used on input line 214.
 (pdftex.def)             Requested size: 145.69937pt x 146.39381pt.
 
-[6 <./places205_finetune_layer1.pdf> <./8_kernel_1_pool_5000_step_iter_50000.pd
-f> <./8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf>]
-<12_6_3_layer1.pdf, id=92, 223.1297pt x 178.4993pt>
-File: 12_6_3_layer1.pdf Graphic file (type pdf)
- <use 12_6_3_layer1.pdf>
-Package pdftex.def Info: 12_6_3_layer1.pdf used on input line 222.
-(pdftex.def)             Requested size: 136.59142pt x 109.27115pt.
+<12_6_best_iter_100000.pdf, id=56, 225.31929pt x 224.45418pt>
+File: 12_6_best_iter_100000.pdf Graphic file (type pdf)
 
-<12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf, id=93, 223.2023
+<use 12_6_best_iter_100000.pdf>
+Package pdftex.def Info: 12_6_best_iter_100000.pdf used on input line 226.
+(pdftex.def)             Requested size: 136.59142pt x 136.06746pt.
+
+<12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf, id=57, 223.2023
 8pt x 185.31854pt>
 File: 12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf Graphic fil
 e (type pdf)
 
 <use 12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf>
 Package pdftex.def Info: 12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90
-000.pdf used on input line 229.
+000.pdf used on input line 233.
 (pdftex.def)             Requested size: 131.12387pt x 108.87323pt.
 
-Underfull \hbox (badness 3861) in paragraph at lines 230--230
+Underfull \hbox (badness 3861) in paragraph at lines 234--234
 []\OT1/cmr/m/n/9 (b) |First-layer neu-rons in a
  []
 
-(./writeup.bbl
+<neuron_color_structure.pdf, id=58, 433.62pt x 289.08pt>
+File: neuron_color_structure.pdf Graphic file (type pdf)
+
+<use neuron_color_structure.pdf>
+Package pdftex.def Info: neuron_color_structure.pdf used on input line 240.
+(pdftex.def)             Requested size: 131.12387pt x 87.41719pt.
+ [6] [7 <./places205_finetune_layer1.pdf> <./8_kernel_1_pool_5000_step_iter_500
+00.pdf> <./8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf> <./12_6_be
+st_iter_100000.pdf> <./12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_9000
+0.pdf> <./neuron_color_structure.pdf>]
+<accuracy_over_iterations.pdf, id=127, 867.24pt x 289.08pt>
+File: accuracy_over_iterations.pdf Graphic file (type pdf)
+
+<use accuracy_over_iterations.pdf>
+Package pdftex.def Info: accuracy_over_iterations.pdf used on input line 268.
+(pdftex.def)             Requested size: 364.24149pt x 121.41277pt.
+ (./writeup.bbl
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
- [7 <./12_6_3_layer1.pdf> <./12_kernel_3_kernel_2_dropout_10000_30_each_1e3_ite
-r_90000.pdf>]
+ [8 <./accuracy_over_iterations.pdf>]
 Missing character: There is no Ã in font cmr10!
 Missing character: There is no © in font cmr10!
-) [8] (./writeup.aux) ) 
+) [9] (./writeup.aux) ) 
 Here is how much of TeX's memory you used:
- 3254 strings out of 493117
- 51799 string characters out of 6135433
- 115599 words of memory out of 5000000
- 6693 multiletter control sequences out of 15000+600000
+ 3271 strings out of 493117
+ 52312 string characters out of 6135433
+ 116651 words of memory out of 5000000
+ 6708 multiletter control sequences out of 15000+600000
  8232 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,9n,38p,1479b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,9n,38p,1500b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/ams
@@ -320,10 +334,10 @@ cmr9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10
 .pfb>
-Output written on writeup.pdf (8 pages, 809443 bytes).
+Output written on writeup.pdf (9 pages, 978299 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 110 compressed objects within 2 object streams
+ 201 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex writeup"] 1417752091 "writeup.aux" "writeup.bbl" "writeup" 1417752093
+["bibtex writeup"] 1417801483 "writeup.aux" "writeup.bbl" "writeup" 1417801797
   "/usr/local/texlive/2014/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "6867project.bib" 1417715831 11149 aaecae508c22aa60906569c134889ddc ""
-  "writeup.aux" 1417752093 3872 205c3fc147c9470e5aa63ac1092d5a84 ""
+  "6867project.bib" 1417799055 11714 b4fa12f70773ebe0d6b8bc546d4c971f ""
+  "writeup.aux" 1417801797 4484 012cfb5f455f7f9c4f5d9b2d6b377f13 ""
   "writeup.bcf" 0 -1 0 ""
   (generated)
   "writeup.bbl"
   "writeup.blg"
-["pdflatex"] 1417752092 "writeup.tex" "writeup.pdf" "writeup" 1417752093
+["pdflatex"] 1417801796 "writeup.tex" "writeup.pdf" "writeup" 1417801797
   "/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii" 1337017135 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty" 1335995445 7612 c47308d923ec19888707b0f1792b326a ""
@@ -37,16 +37,18 @@
   "/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty" 1335995445 22417 c74ff4af6a1aa2b65d1924020edbbe11 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def" 1306616590 55368 3c8a0d99822330f2dfabc0dfb09ce897 ""
   "/usr/local/texlive/2014/texmf-dist/tex/latex/tools/enumerate.sty" 1399675188 3255 42d834dc82171769c16badd22df87021 ""
-  "12_6_3_layer1.pdf" 1417750644 116625 e179bf65f648440a0c29b0257d011ced ""
+  "12_6_best_iter_100000.pdf" 1417801372 138523 df7c83eb6a7477b8d0951cbf1b9fa0e2 ""
   "12_kernel_3_kernel_2_dropout_10000_30_each_1e3_iter_90000.pdf" 1417750663 119277 5224f32d5162795ea9274bc7d40ec730 ""
   "8_kernel_1_pool_1_dropout_5000_step_5000_after_20000.pdf" 1417749750 138192 3b96d42649ba9e6e92470f383eb4ac95 ""
   "8_kernel_1_pool_5000_step_iter_50000.pdf" 1417749782 145461 d971e7c31e4a2c1fbc44b99d98c05df3 ""
+  "accuracy_over_iterations.pdf" 1417797393 12169 a208f952294c2007b13149871525c890 ""
   "generalcnn.pdf" 1417749520 15129 c8bf27a3397fc251e3c179ccc7397c02 ""
   "logreg.pdf" 1417749501 13548 dbf8b853122b09b727dcfaaebc3879b3 ""
+  "neuron_color_structure.pdf" 1417801321 133108 c4b7749997db317ca6fba4deb303b6fd ""
   "places205_finetune_layer1.pdf" 1417749810 112478 3ee25008060a1e6020847a2edb04300f ""
-  "writeup.aux" 1417752093 3872 205c3fc147c9470e5aa63ac1092d5a84 ""
-  "writeup.bbl" 1417752092 4076 c38a5fc5d6afba191524e4aaa3d061dd "bibtex writeup"
-  "writeup.tex" 1417752089 27772 a08b28914d12f8023b93742a552ec607 ""
+  "writeup.aux" 1417801797 4484 012cfb5f455f7f9c4f5d9b2d6b377f13 ""
+  "writeup.bbl" 1417801484 4580 d71c1173514c82cdf227aaf96ec56c8b "bibtex writeup"
+  "writeup.tex" 1417801795 32075 fcd61033108f9b4f598d692d75b63f4d ""
   (generated)
   "writeup.log"
   "writeup.pdf"

@@ -42,7 +42,7 @@ The main guiding this exploration is: can you construct a significantly simpler 
 
 The task of scene recognition is different from object recognition in that scene recognition relies on clues from the entire image and the general layout rather than specific qualities of objects. The standard dataset for scene recognition is the SUN397 database \cite{xiao_sun_2010}, which has 397 scene categories, with at least 100 images in both categories. The standard train / test splits have 50 images per category in both training and testing. The benchmark classification results on this dataset using hand-crafted features is reported by Xiao, et. al. \cite{xiao_sun_2010}, \cite{xiao_sun_2014}. To build on the SUN397 database is the PLACES database \cite{zhou_learning_2014}, which benchmarks itself against SUN397, and notably uses CNNs for scene classification, rather than hand-crafted features. Because SUN397 has a manageable amount of data to use for training, I will use that database to do tests, benchmarking against the classification rates reported in the SUN papers. The PLACES database and results will provide a second state-of-the-art benchmark for scene classification as well.
 
-To construct the neural networks and take advantage of GPU capabilities, I will use the Caffe software package \cite{jia_caffe:_2014}, optimized for GPU performance and slowly becoming the standard in academic work for building CNNs. There are bindings for C++, Python, and MATLAB, allowing for the use of various interfaces for analysis. The added benefit of using this system is that the PLACES database provides a trained CNN model that can be used for fine-tuning with SUN. Additionally, the Vision Group has a cluster of GPU machines that can effectively run Caffe with some persuasion, so the training times for the networks will be drastically improved over running on a small laptop PC CPU. One of the bottleneck steps in using training data is reading data from disk, so the training and testing sets are converted into LMDB databases optimized for multi-threaded querying. All images are resized to 227 x 227 pixels, in accordance with comparable computer vision experiments. The reason for the small size in images is three-fold: (1) consistent higher-resolution images were only available as standard datasets relatively recently; (2) it has been shown in prior experiments from both neuroscience and computer vision that image-level features do not change significantly when shrunk to this size REFERENCE, and (3) smaller images mean performance increases when reading from disk and computing features over the entire image.
+To construct the neural networks and take advantage of GPU capabilities, I will use the Caffe software package \cite{jia_caffe:_2014}, optimized for GPU performance and slowly becoming the standard in academic work for building CNNs. There are bindings for C++, Python, and MATLAB, allowing for the use of various interfaces for analysis. The added benefit of using this system is that the PLACES database provides a trained CNN model that can be used for fine-tuning with SUN. Additionally, the Vision Group has a cluster of GPU machines that can effectively run Caffe with some persuasion, so the training times for the networks will be drastically improved over running on a small laptop PC CPU. One of the bottleneck steps in using training data is reading data from disk, so the training and testing sets are converted into LMDB databases optimized for multi-threaded querying. All images are resized to 227 x 227 pixels, in accordance with comparable computer vision experiments. The reason for the small size in images is three-fold: (1) consistent higher-resolution images were only available as standard datasets relatively recently; (2) it has been shown in prior experiments from both neuroscience and computer vision that image-level features do not change significantly when shrunk to this size \cite{donahue_decaf:_2014}, and (3) smaller images mean performance increases when reading from disk and computing features over the entire image.
 
 % * CNNs have proven effective in image classification because of the ability to learn high-level features
 % * CNN is like a multiclass perceptron?
@@ -83,6 +83,8 @@ To set up a single network in Caffe is complicated without knowing the interface
 
 The setup for (linear) logistic regression as a neural network is then represented as shown in Figure \ref{fig:logregnn}. A fully-connected layer is equivalent to calculating weighted sum of dot products between the inputs to the layer, and the softmax function takes these 397 functions and calculates probabilities between them. There are as many layers in the fully-connected network as there are training images, but there are only 397 outputs, meaning there are 397 linear-combinations of functions calculated using weights from the training images. Using stochastic gradient descent to compute the parameters, the optimal learning weight (by grid search and suggestions from Bottou \cite{bottou_large-scale_2010}) was found to be approximately $1 \times 10^{-8}$. On a GPU for 20000 iterations, this takes approximately 15 minutes and results in a top-1 accuracy prediction of 4 percent and a top-5 accuracy prediction of 13 percent. Because simple logistic regression learns relatively few parameters and is only capable of linear combinations of inputs, the idea is that adding any sort of more complicated network will increase this base classification rate. Methods involving more complicated networks were only considered if they yielded results better than this baseline 13 percent top-5 accuracy with logistic regression. 
 
+Inputs to all tests scaled the image down to 227 by 227 pixels, consistent with the format proposed by AlexNet and used by competitors in the Large-Scale Visual Recognition Challenge \cite{krizhevsky_imagenet_2012}, \cite{russakovsky_imagenet_2014}. The mean image of the training set was calculated and subtracted from all the images used (both training and test), effectively centering the data.
+
 The standard metric for measuring success against the SUN database is the top-1 classification accuracy rate for correctly predicting with maximum likelihood the correct class. However, because many categories in the SUN397 database are similar (like for example `building exterior' and `apartment building outdoor'), I will also report a top-5 accuracy rate.
 
 After exploring this pipeline using Caffe, for each set of experiments I had to do the following steps: 
@@ -107,9 +109,8 @@ Because I was limited by computational power and time, for each experiment I cho
 \begin{tabular}[ht]{c|c|c}
 Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
 Logistic regression & 4 \% & 14 \% \\
-Best single-layer network &   \% &  \% \\
-Best two-layer network &   \% &   \% \\
-Simple 3-layer network &    \% &   \% \\
+Best single-layer network &  6.7 \% & 18.2 \% \\
+Best two-layer network &  12.6 \% &  31.1 \% \\
 Fine-tuned PLACES CNN & 51.3 \% & 80.1 \% \\
 PLACES CNN best SUN397 result & 54.3 \% & not reported \\
 \end{tabular}
@@ -117,6 +118,8 @@ PLACES CNN best SUN397 result & 54.3 \% & not reported \\
 \caption{Summary of top-1 and top-5 accuracy results on the test set}
 \label{tbl:results}
 \end{table}
+
+There is a significant gap in the performance of smaller networks trained on fewer images than the fine-tuned PLACES network that was originally trained on 6 million auxiliary images.
 
 \subsection{Single-layer networks of varying kernel size}
 
@@ -129,15 +132,15 @@ The kernels that were tested were $8 \times 8$, $12 \times 12$, and $20 \times 2
 \begin{table}[!ht]
 \centering
 \makebox[\textwidth][c]{
-\begin{tabular}[ht]{c|c|c}
-Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
-96 8$\times$8 kernels, no dropout &  4.8 \% & 14.8 \% \\
-96 8$\times$8 kernels, with dropout &  5.7 \% &  15.2 \% \\
-96 8$\times$8 kernels, with dropout and RELU & .8 \% & 2 \% \\
-96 12$\times$12 kernels, no dropout &  4.4 \% & 13.5 \% \\
-96 12$\times$12 kernels, with dropout &  5.5 \% & 15.8 \% \\
-96 20$\times$20 kernels, with dropout & 6.7 \% & 18.2 \% \\
-30 20$\times$20 kernels, with dropout &  6.5 \% & 17.9 \% \\
+\begin{tabular}[ht]{c|c|c|c}
+Procedure & Top-1 Accuracy & Iterations & Top-5 Accuracy \\\hline
+96 8$\times$8 kernels, no dropout &  50000 & 4.8 \% & 14.8 \% \\
+96 8$\times$8 kernels, with dropout &  20000 & 5.7 \% &  15.2 \% \\
+96 8$\times$8 kernels, with dropout and RELU &  50000 & .8 \% & 2 \% \\
+96 12$\times$12 kernels, no dropout &   20000 & 4.4 \% & 13.5 \% \\
+96 12$\times$12 kernels, with dropout &  50000  & 5.5 \% & 15.8 \% \\
+96 20$\times$20 kernels, with dropout &  20000  & 6.7 \% & 18.2 \% \\
+30 20$\times$20 kernels, with dropout &  20000  & 6.5 \% & 17.9 \% \\
 \end{tabular}
 }
 \caption{Summary of top-1 and top-5 accuracy results on single-layer networks after 20000 iterations}
@@ -159,23 +162,24 @@ After the hyperparameters were roughly optimized for single-layer networks, two-
 \begin{table}[!ht]
 \centering
 \makebox[\textwidth][c]{
-\begin{tabular}[ht]{c|c|c}
-Procedure & Top-1 Accuracy & Top-5 Accuracy \\\hline
-30 12$\times$12 kernels, 30 6$\times$6 kernels &  10 \% & 25.2 \% \\
-30 20$\times$20 kernels, 30 6$\times$6 kernels &  7.5 \% & 21.4 \% \\
-30 12$\times$12 kernels, 30 3$\times$3 kernels &  6.1 \% & 18.9 \% \\
-30 20$\times$20 kernels, 30 3$\times$3 kernels &  5.1 \% & 16.3 \% \\
-60 20$\times$20 kernels, 30 6$\times$6 kernels &  9.5 \% & 25.7 \% \\
-96 12$\times$12 kernels, 30 6$\times$6 kernels &  \% &  \% \\
+\begin{tabular}[ht]{c|c|c|c}
+Procedure & Iterations & Top-1 Accuracy & Top-5 Accuracy \\\hline
+30 12$\times$12 kernels, 30 6$\times$6 kernels & 30000 & 10.0 \% & 25.24 \% \\
+30 20$\times$20 kernels, 30 6$\times$6 kernels & 50000 & 7.5 \% & 21.4 \% \\
+30 12$\times$12 kernels, 30 3$\times$3 kernels & 100000 & 6.1 \% & 18.9 \% \\
+30 20$\times$20 kernels, 30 3$\times$3 kernels & 50000 & 5.1 \% & 16.3 \% \\
+60 20$\times$20 kernels, 30 6$\times$6 kernels & 20000 & 9.6 \% & 26.0 \% \\
+96 12$\times$12 kernels, 30 6$\times$6 kernels & 30000 & 12.6\% &  31.1\% \\
 \end{tabular}
 }
-\caption{Summary of top-1 and top-5 accuracy results on two-layer networks after 20000 iterations}
+\caption{Summary of best top-1 and top-5 accuracy results on two-layer networks}
 \label{tbl:twolayer}
 \end{table}
 
 In addition to tuning a few 2-layer network, one 3-layer network was tuned for 50000 iterations, with 30 12$\times$12 filters, then 30 6$\times$6 filters, then 30 3$\times$3 filters, with pooling and dropout layers after each convolutional layer. However, there was most likely something wrong with the solver parameters or there was not enough training done, since the top-1 accuracy for the 3-layer network was 1.6 percent and the top-5 accuracy was 7.4 percent. There was not enough time to do more 3-layer network experiments, but if there was time, training or grid search with more parameters would have been tried.
 
 \subsection{Fine-tuning on PLACES-CNN}
+\label{sec:places}
 
 To both be consistent with state-of-the-art algorithms for classification and reproduce results from the PLACES database paper \cite{zhou_learning_2014}, I took the PLACES-CNN model that was developed and distributed with the paper and fine-tuned it to classify the SUN397 database. The procedure for fine-tuning is to take the weights from a pre-trained network that was trained on an auxiliary database, changing the final softmax layer to a layer that predicts the correct number of classes for the SUN397 task, and running approximately 20000 iterations. This PLACES database network has a total of 8 layers, 3 of them fully connected and the first 5 convolutional layers with filters of varying sizes. There are over a million parameters in this model, and the original one takes 7 days to train on a GPU from scratch for all of the PLACES database. After fine-tuning, the results are astounding in how much more accurate it is than simple networks - comparable to the best performance on SUN397 ever. There was a top-1 accuracy of 51.3 percent and a top-5 accuracy of 80.1 percent.
 
@@ -213,14 +217,14 @@ Looking at the first-layer neurons in the single-layer and multi-layer networks 
 \end{subfigure}
 \end{figure}
 
-Even looking at the three-layer network that was trained for 100000 iterations, the neurons in the first layer do not resemble any kind of human-readable structure. In fact, they look similar (and similarly unstructured) to the first-layer neurons in a similar single-layer 12 by 12 kernel network, as seen in Figures \ref{fig:12_6_3} and \ref{fig:12}.
+Even looking at the best-performing two-layer network (which had 12.6 percent top-1 accuracy), the neurons in the first layer do not resemble any kind of human-readable structure. There are a few neurons that are starting to resemble structure with clusterings of color or pattern, as shown in Figure \ref{fig:someneuronstructure}, but it is a stretch. In fact, they look similar (and similarly unstructured) to the first-layer neurons in a similar single-layer 12 by 12 kernel network, as seen in Figures \ref{fig:12_6_3} and \ref{fig:12}.
 
 \begin{figure}[!ht]
 \centering
 \begin{subfigure}[t]{0.3\textwidth}
 	\centering
-	\includegraphics[width=\textwidth]{12_6_3_layer1.pdf}
-	\caption{First-layer neurons in a 12x12, then 6x6, then 3x3 kernel network}
+	\includegraphics[width=\textwidth]{12_6_best_iter_100000.pdf}
+	\caption{First-layer neurons in the best-performing two-layer network}
 	\label{fig:12_6_3}
 \end{subfigure}
 \hspace{3mm}
@@ -230,22 +234,42 @@ Even looking at the three-layer network that was trained for 100000 iterations, 
 	\caption{First-layer neurons in a 12x12 single-layer network}
 	\label{fig:12}
 \end{subfigure}
+\hspace{3mm}
+\begin{subfigure}[t]{0.288\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{neuron_color_structure.pdf}
+	\caption{Two neurons showing some color or pattern structure}
+	\label{fig:someneuronstructure}
+\end{subfigure}
 \end{figure}
 
 \subsection{Choosing hyperparameters}
 
-To start the hyperparameter optimization process, I started on the 
+To start the hyperparameter optimization process, the parameters most commonly used in training AlexNet and recommended by Caffe \cite{jia_caffe:_2014}, \cite{krizhevsky_imagenet_2012} were used. However, because those networks were almost 10 orders of magnitude in the number of parameters than the small networks used in this project, the learning rate for training had to be significantly decreased for numerical stability. It was also recommended \cite{bottou_large-scale_2010}, \cite{agrawal_analyzing_2014} to include a dropoff factor of 10 for the learning rate to prevent overfitting and numerical instability later in the process, so this was followed and not played with too much. Another important aspect of using stochastic gradient descent is initializing the weights. While AlexNet uses Gaussian weight initialization \cite{krizhevsky_imagenet_2012}, using the xavier algorithm for determining the initialization of weights based on how many parameters there are in the layer \cite{glorot_understanding_2010}. This led to better performance results, so was used instead of Gaussian weights for all the initialization.
 
-% * started from hyperparameters given in CNN papers
-% * like in 8_kernel_1_pool_1_dropout_10000_step_1e5, optimal learning rate for NNs of comparable size was 0.00001 with dropoff by a factor of 10 every 10000 iterations
-% * gaussian processes might have been easier than a grid search
-% * use what you know about the domain space - number of classes can dictate the paths of activation that the neurons can take
-% * more training and better results in top-5 accuracy. implies that MOAR training will yield better results in top-1 also
-% initialize with xavier or gaussian weights
+The method I used for choosing parameters was primarily grid search, mainly varying learning rate and dropoff rate. However, using a Gaussian process would have been an easier process than spending time running experiments that did not yield good results. 
+
+One potential improvement in choosing hyperparameters like network and kernel size is knowledge of the domain space. The experiments and kernel sizes chosen for this project were chosen based on knowledge about scene recognition. Since the input images were scaled to 227 by 227 pixels, the initial kernels were chosen to be large, to cover larger features in the space. Because scene recognition essentially analyzes larger features in the image, larger kernels tended to perform better at all network types, seen in Tables \ref{tbl:singlelayer} and \ref{tbl:twolayer}. It would have also been easier to use something like a Gaussian process to estimate various parameters in the network, but this is later work that can be done with the preliminary results in this project.
+
+Another suggestion from the AlexNet experiments \cite{krizhevsky_imagenet_2012} was `fine-tune' a network rather than tune it from scratch. In other words, if your network shares any structures in common from networks that have already been tuned, use those weights to initialize the layers in the network that are shared. This can be seen with the discussion of fine-tuning the PLACES architecture in Section \ref{sec:places}.
+
+In future work, it would be interesting to construct a Gaussian process model with various network parameters correlated with the number of network parameters to automate or improve the hyperparameter estimation and network design process.
 
 \subsection{Mitigating Overfitting}
 
 Additionally, larger networks were less susceptible to overfitting. For example, the 8$\times$8 single-layer kernel network with 96 filters after 50000 iterations had decreased the training set loss to $0.5$, but on the test set showed loss values closer to $6$. Networks with more parameters tend to overfit less, and also using strategies like dropout mitigated this risk. However, the same 8$\times$8 network from above with a dropout layer after the convolutional layer after only 20000 iterations showed a nearly 0 loss on the training set, but reported a loss of over $34$ on the test set. The results were 15 percent top-5 accuracy despite the large test loss, but it is clear that there was an overfitting of the training data. This could have been caused by either a lack of training data, or trying to fit too many parameters in the model.
+
+Sometimes overfitting also happens with a large number of iterations. Training the same small network for 100000 iterations, it is easy to test at various points and see where the error on the test set levels out. In Figure \ref{fig:accuracyovertime}, it is clear that both the top-1 and top-5 accuracy reach a peak at some point (in both of these cases, approximately 30000 iterations) and then level off or even decrease slightly. The slight decrease might be a result of the overfitting, or of the slightly randomized nature of running the accuracy test. It will save both training time and accuracy if training is stopped once the network is `saturated', or does not change in accuracy on the test set.
+
+\begin{figure}[!ht]
+\centering
+\begin{subfigure}[t]{0.8\textwidth}
+	\centering
+	\includegraphics[width=\textwidth]{accuracy_over_iterations.pdf}
+	\caption{Top-1 and Top-5 accuracy over iterations}
+	\label{fig:accuracyovertime}
+\end{subfigure}
+\end{figure}
 
 % TODO: graph of difference between training and test errors to show overfitting? ex: 8_kernel_1_pool_1_dropout_10000_step_1e5.log. and there are others.
 
