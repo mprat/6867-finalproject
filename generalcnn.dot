@@ -1,0 +1,7 @@
+digraph LogReg {
+	rankdir=LR;
+	"Input" -> "Convolution layer";
+	"Convolution layer" -> "Pooling layer";
+	"Pooling layer" -> "Fully connected layer"
+	"Fully connected layer" -> "Softmax loss";
+}
